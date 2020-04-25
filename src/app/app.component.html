@@ -1,0 +1,32 @@
+<div class="topNav">
+
+</div>
+<div class="search">
+  <input type="text" name="q" class="searchbox" [(ngModel)]="filterText" placeholder="Search recipe">
+</div>
+
+<div class="root-container">
+  <div *ngIf="cartList.length>0" class="order-summary">
+    <table class="order-table">
+      <tr>
+        <th style="width: 150px;">Type</th>
+        <th style="width: 150px;">Amount</th>
+      </tr>
+      <tr *ngFor="let item of cartList; index as i;">
+        <td style="width: 150px;">{{item.type}}</td>
+        <td style="width: 150px;">{{item.totalPrice}}</td>
+      </tr>
+    </table>
+    <hr style="width: 300px;">
+    <label>Total Amount :{{totalAmout}}</label>
+  </div>
+
+
+
+
+  <div class="item-info"
+    *ngFor="let food of foodList | filterRecipe:{ name: filterText, price: filterText, rating: filterText, category : filterText } : false; index as i;">
+    <app-food-detail [foodInfo]="food"></app-food-detail>
+    <button (click)="addToCart(food)">Add to Cart</button>
+  </div>
+</div>
